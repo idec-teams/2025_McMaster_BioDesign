@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hex helper */
+.clip-hex { clip-path: polygon(25% 3%,75% 3%,97% 50%,75% 97%,25% 97%,3% 50%); }
+
+@layer components {
+  .card { @apply rounded-3xl border border-base-line bg-base-card shadow-card; }
+  .container-xl { @apply max-w-6xl mx-auto px-4; }
+  .pill { @apply inline-flex items-center rounded-full border border-base-line bg-white/5 px-2.5 py-1 text-xs; }
+  .nav-link { @apply px-3 py-2 rounded-lg hover:bg-white/5 transition; }
+  .nav-active { @apply text-brand-400 border-b-2 border-brand-500; }
+}
