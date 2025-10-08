@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" class="dark h-full scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>McMaster BioDesign – iDEC 2025</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" type="image/png" href="/img/logo.png" />
+
+    <style>
+      :root {
+        --card-bg: 255 255 255 / 0.04;
+        --card-border: 255 255 255 / 0.08;
+        --soft-shadow: 0 1px 2px rgba(0, 0, 0, 0.25),
+          0 8px 24px rgba(0, 0, 0, 0.22);
+      }
+
+      .dark .card-surface {
+        background: rgba(var(--card-bg));
+        border: 1px solid rgba(var(--card-border));
+        box-shadow: var(--soft-shadow);
+        backdrop-filter: blur(6px);
+      }
+
+      html {
+        font-family: "Manrope", ui-sans-serif, system-ui, -apple-system,
+          Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
+        color-scheme: dark;
+      }
+
+      code,
+      pre {
+        font-family: "DM Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+          Consolas, "Liberation Mono", monospace;
+      }
+
+      body {
+        background-color: rgb(10 10 10 / 1);
+        color: rgb(244 244 245 / 1);
+      }
+
+      .hero-title {
+        font-weight: 900;
+        letter-spacing: -0.02em;
+        line-height: 1.05;
+        text-shadow: 0 2px 0 rgba(0,0,0,0.35), 0 18px 60px rgba(0,0,0,0.35);
+      }
+      .hero-accent {
+        color: #2FC7A6; /* match the green in your mock */
+        text-shadow: 0 2px 0 rgba(0,0,0,0.35), 0 18px 60px rgba(0,0,0,0.35);
+      }
+
+      .btn-hero {
+        height: 42px;
+        padding: 0 16px;
+        border-radius: 9999px; /* pill */
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+        transition: transform .12s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease;
+      }
+      .btn-hero:hover { transform: translateY(-1px); }
+      .btn-hero:active { transform: translateY(0); }
+
+      .btn-hero--primary {
+        background: #28C8A7;
+        color: #05211C;
+      }
+      .btn-hero--primary:hover { background: #22b399; }
+
+      .btn-hero--dark {
+        background: rgba(8,12,16,0.9);
+        color: #E8F5F2;
+      }
+      .btn-hero--dark:hover { background: rgba(8,12,16,1); }
+
+      .btn-hero:focus-visible {
+        outline: 2px solid #28C8A7;
+        outline-offset: 2px;
+      }
+
+    </style>
+    <script type="module" crossorigin src="/2025_McMaster_BioDesign/assets/index-2ryz_Wda.js"></script>
+    <link rel="stylesheet" crossorigin href="/2025_McMaster_BioDesign/assets/index-DxMZFXbT.css">
+  </head>
+
+  <body class="h-full bg-base-bg text-zinc-100 antialiased">
+    <div id="root"></div>
+  </body>
+</html>
