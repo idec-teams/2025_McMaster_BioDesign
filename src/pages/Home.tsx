@@ -11,6 +11,9 @@ import hexChip  from "../assets/hex-chip.svg";
 import hexTeam  from "../assets/hex-team.svg";
 import hexBook  from "../assets/hex-book.svg";
 
+// ✅ Import the PDF from assets
+import labNotebook from "../assets/lab-notebook.pdf";
+
 export default function Home() {
   const heroEl = (
     <Hero image={hero} objectPosition="center 30%">
@@ -43,6 +46,15 @@ export default function Home() {
         >
           Dry Lab
         </Link>
+        {/* ✅ Use imported PDF */}
+        <a
+          href={labNotebook}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center h-11 px-6 rounded-full font-semibold text-[15px] bg-black/80 text-white hover:bg-black shadow-[0_6px_25px_rgba(0,0,0,0.4)] transition-transform hover:-translate-y-[1px]"
+        >
+          Lab Notebook
+        </a>
       </div>
     </Hero>
   );
