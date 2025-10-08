@@ -11,8 +11,9 @@ import hexChip  from "../assets/hex-chip.svg";
 import hexTeam  from "../assets/hex-team.svg";
 import hexBook  from "../assets/hex-book.svg";
 
-// ✅ Import the PDF from assets
+// ✅ Import the PDFs from assets
 import labNotebook from "../assets/lab-notebook.pdf";
+import labReport from "../assets/lab-report.pdf";   // <-- new import
 
 export default function Home() {
   const heroEl = (
@@ -46,7 +47,7 @@ export default function Home() {
         >
           Dry Lab
         </Link>
-        {/* ✅ Use imported PDF */}
+        {/* ✅ Lab Notebook PDF */}
         <a
           href={labNotebook}
           target="_blank"
@@ -54,6 +55,15 @@ export default function Home() {
           className="inline-flex items-center justify-center h-11 px-6 rounded-full font-semibold text-[15px] bg-black/80 text-white hover:bg-black shadow-[0_6px_25px_rgba(0,0,0,0.4)] transition-transform hover:-translate-y-[1px]"
         >
           Lab Notebook
+        </a>
+        {/* ✅ Lab Report PDF */}
+        <a
+          href={labReport}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center h-11 px-6 rounded-full font-semibold text-[15px] bg-black/80 text-white hover:bg-black shadow-[0_6px_25px_rgba(0,0,0,0.4)] transition-transform hover:-translate-y-[1px]"
+        >
+          Lab Report
         </a>
       </div>
     </Hero>
@@ -70,7 +80,7 @@ export default function Home() {
           <p className="mt-2 text-zinc-700 dark:text-zinc-300 text-[14.5px]">
             Many proteins fold better at low temperatures, but expression
             plummets. The native <em>cspA</em> system surges during cold
-            shock—an ideal chassis to evolve.
+            shock—an ideal target to evolve.
           </p>
         </div>
 

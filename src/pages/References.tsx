@@ -74,7 +74,7 @@ export default function References() {
             <section>
               <h2 className="text-purple-300">Acknowledgments</h2>
               <p className="text-zinc-400 text-sm leading-relaxed">
-                The McMaster iDEC team thanks the Department of Chemical Engineering, the Faculty of Engineering, and the Faculty of Science for supporting this project. Special thanks to William Pihlainen-Bleecker and mentors from the 2025 BioDesign cohort for technical guidance and resources.
+                We would like to acknowledge the Currie Lab and the Singh Lab for their guidance and support throughout this project. Special thanks to Dr. Valentina Evdokimova from the Ontario Institute for Cancer Research (OICR) for generously providing reagents and materials essential to our experiments.
               </p>
             </section>
           </div>
