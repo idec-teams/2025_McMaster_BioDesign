@@ -1,8 +1,8 @@
 name: Deploy Vite site to GitHub Pages
 
 on:
-  push:
-    branches: [main]  # or "master" if that's your default branch
+  push: { branches: [ "main" ] }
+  workflow_dispatch:
 
 jobs:
   build-deploy:
@@ -12,25 +12,23 @@ jobs:
       pages: write
       id-token: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
 
-      - name: Install dependencies
-        run: npm ci
+      - run: npm ci
+      - run: npm run build
 
-      - name: Build
-        run: npm run build
+      # 👇 create 404 **before** deploying so it gets uploaded
+      - name: SPA 404 fallback
+        run: cp dist/index.html dist/404.html
 
+      # publish dist/ to gh-pages
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: dist
-
-      - name: SPA 404 fallback
-        run: cp dist/index.html dist/404.html
