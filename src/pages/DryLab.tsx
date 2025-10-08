@@ -1,14 +1,6 @@
 import React from "react";
 import Layout from "../components/Layout";
-
-type FigureProps = { src: string; alt: string; caption: React.ReactNode };
-const Figure: React.FC<FigureProps> = ({ src, alt, caption }) => (
-  <figure className="rounded-2xl border border-zinc-800 overflow-hidden bg-zinc-900">
-    {/* eslint-disable-next-line @next/next/no-img-element */}
-    <img src={src} alt={alt} className="w-full h-auto" />
-    <figcaption className="p-3 text-sm text-zinc-400 border-t border-zinc-800">{caption}</figcaption>
-  </figure>
-);
+import heroDrylab from "../assets/banners/hero-drylab.png";
 
 const Paper: React.FC<React.PropsWithChildren<{ className?: string }>> = ({ children, className = "" }) => (
   <div className={`relative ${className}`}>
@@ -24,7 +16,7 @@ const ThinHero: React.FC<{ title: string; image: string; subtitle?: React.ReactN
         <img src={image} alt="" className="h-40 md:h-56 w-full object-cover brightness-90 saturate-90" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/60" aria-hidden />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-          <h1 className="text-3xl md:text-5xl font-extrabold text-white drop-shadow">{title}</h1>
+          <h1 className="text-3xl md:text-5xl font-extrabold text-white drop-shadow">Dry Lab</h1>
           {subtitle && <p className="mt-2 text-sm md:text-base text-zinc-300 drop-shadow max-w-3xl">{subtitle}</p>}
         </div>
       </div>
@@ -33,16 +25,13 @@ const ThinHero: React.FC<{ title: string; image: string; subtitle?: React.ReactN
   </div>
 );
 
-const fig = (n: number) => `/img/figures/fig-${n}.png`;
-const tableFig = (n: number) => `/img/figures/table-${n}.png`;
-
 export default function DryLab() {
   return (
     <Layout
       hero={
         <ThinHero
           title="Dry Lab"
-          image="/images/banners/hero-drylab.png"
+          image={heroDrylab}
           subtitle="Computational design for the cspA system: datasets, materials, methods, and in-silico variant ranking."
         />
       }
@@ -55,127 +44,112 @@ export default function DryLab() {
                 <nav className="sticky top-24 p-3 rounded-xl border border-zinc-800 bg-zinc-950/60">
                   <div className="text-xs uppercase tracking-wide text-zinc-400 mb-2">On this page</div>
                   <ol className="space-y-2 text-sm">
-                    <li><a className="toc" href="#methods">Materials &amp; Methods</a></li>
+                    <li><a className="toc" href="#overview">Overview</a></li>
+                    <li><a className="toc" href="#data">Data &amp; Preprocessing</a></li>
                     <li><a className="toc" href="#features">Feature Engineering</a></li>
                     <li><a className="toc" href="#models">Models</a></li>
                     <li><a className="toc" href="#training">Training &amp; Metrics</a></li>
                     <li><a className="toc" href="#results">Results</a></li>
                     <li><a className="toc" href="#ablations">Ablations</a></li>
-                    <li><a className="toc" href="#tables">Tables</a></li>
-                    <li><a className="toc" href="#designer">Designer</a></li>
-                    <li><a className="toc" href="#future">Future (Dry Lab)</a></li>
+                    <li><a className="toc" href="#designer">Designer &amp; Selection</a></li>
+                    <li><a className="toc" href="#repro">Reproducibility</a></li>
+                    <li><a className="toc" href="#future">Future</a></li>
                   </ol>
                 </nav>
               </aside>
 
               <section className="space-y-12">
-                {/* MATERIALS & METHODS */}
-                <section id="methods">
-                  <h2 className="text-purple-300">Materials &amp; Methods</h2>
+                <section id="overview">
+                  <h2 className="text-purple-300">Overview</h2>
+                  <p className="text-zinc-300">
+                    We modeled expression in the <em>PcspA</em> context to prioritize upstream (UB) and downstream (DB) variants for wet-lab testing.
+                    The goal was not absolute prediction, but reliable ranking and uncertainty estimates to select a small set of constructs.
+                  </p>
+                </section>
 
-                  <h3>Data Sources</h3>
+                <section id="data">
+                  <h2 className="text-purple-300">Data &amp; Preprocessing</h2>
+                  <h3>Sources</h3>
                   <ul className="text-zinc-300">
-                    <li>Public promoter strength panels (e.g., Anderson library) with transferred/normalized labels.</li>
-                    <li>Task-specific <em>cspA</em>-context sequences (promoter + 5′-UTR) from literature and internal designs.</li>
-                    <li>Hold-out set built by stratifying on base promoter and variant class.</li>
+                    <li>Public promoter panels (e.g., Anderson library) with harmonized strength labels.</li>
+                    <li>Task-specific <em>cspA</em> promoter + 5′-UTR sequences from literature and internal designs.</li>
+                    <li>Hold-out split stratified by base promoter and variant class.</li>
                   </ul>
-
-                  <h3>Preprocessing</h3>
+                  <h3>Normalization &amp; Splits</h3>
                   <ul className="text-zinc-300">
-                    <li>Sequence windowing around −35/−10 and Shine–Dalgarno/start context.</li>
-                    <li>Temperature-adjusted proxies (e.g., ΔG at 15–25&nbsp;°C for UTR segments).</li>
-                    <li>Label scaling and binning for ratio/strength tasks; train/val/test splits with fixed RNG seeds.</li>
-                  </ul>
-
-                  <h3>Features</h3>
-                  <ul className="text-zinc-300">
-                    <li>k-mer (3–6) frequencies; EVMP-style locality windows.</li>
-                    <li>Motif scores (−35/−10, UP element), spacer length, GC% and AT-tract metrics.</li>
-                    <li>Secondary-structure proxies: ΔG windows in 5′-UTR.</li>
-                  </ul>
-
-                  <h3>Models</h3>
-                  <ul className="text-zinc-300">
-                    <li>Baselines: Ridge/Lasso, Random Forest/XGBoost.</li>
-                    <li>EVMP-inspired CNN with dilations; Transformer (4–6 heads, 2–4 layers) with CLS regression head.</li>
-                    <li>Optional conditional generative module for design proposals.</li>
-                  </ul>
-
-                  <h3>Training &amp; Evaluation</h3>
-                  <ul className="text-zinc-300">
-                    <li>Loss: Huber for regression; multi-task (strength, cold/warm ratio) when applicable.</li>
-                    <li>5-fold CV; early stopping on val MAE; metrics: Pearson/Spearman r, MAE, precision@k for ranking.</li>
-                    <li>Calibration via isotonic regression for uncertainty-aware picking.</li>
-                  </ul>
-
-                  <h3>Reproducibility</h3>
-                  <ul className="text-zinc-300">
-                    <li>Python 3.11, NumPy/scikit-learn, PyTorch/TF; environment yaml &amp; seeds committed.</li>
-                    <li>Dataset/model hashes logged; split manifests checked into repo.</li>
+                    <li>Windowed sequences around −35/−10 and Shine–Dalgarno/start regions.</li>
+                    <li>Temperature-aware proxies (e.g., ΔG in 5′-UTR windows at 15–25&nbsp;°C).</li>
+                    <li>Label scaling for strength/ratio tasks; fixed RNG seeds for train/val/test.</li>
                   </ul>
                 </section>
 
-                {/* FEATURE ENGINEERING */}
                 <section id="features">
-                  <h2>Feature Engineering</h2>
-                  <Figure src={fig(6)} alt="Feature map" caption="Fig. 6 — Feature map aligning motifs and ΔG windows." />
+                  <h2 className="text-purple-300">Feature Engineering</h2>
+                  <ul className="text-zinc-300">
+                    <li><strong>Motifs:</strong> −35/−10 consensus scores; UP element; spacer length.</li>
+                    <li><strong>Composition:</strong> GC%, AT-tract metrics; k-mer (3–6) frequencies.</li>
+                    <li><strong>Structure proxies:</strong> ΔG windows within the 5′-UTR near the RBS/start.</li>
+                    <li><strong>Context windows:</strong> EVMP-style locality around functional boxes.</li>
+                  </ul>
                 </section>
 
-                {/* MODELS */}
                 <section id="models">
-                  <h2>Models</h2>
-                  <div className="grid md:grid-cols-2 gap-4 mt-6">
-                    <Figure src={fig(7)} alt="EVMP-CNN" caption="Fig. 7 — EVMP-style CNN over k-mer embeddings." />
-                    <Figure src={fig(8)} alt="Transformer" caption="Fig. 8 — Compact transformer for low-temp strength and ratio." />
-                  </div>
+                  <h2 className="text-purple-300">Models</h2>
+                  <ul className="text-zinc-300">
+                    <li><strong>Baselines:</strong> Ridge/Lasso and tree ensembles (RF/XGBoost).</li>
+                    <li><strong>Neural:</strong> compact CNN (dilated) and a small Transformer.</li>
+                    <li><strong>Optional:</strong> conditional generator to propose UB/DB edits under constraints.</li>
+                  </ul>
                 </section>
 
-                {/* TRAINING & METRICS */}
                 <section id="training">
-                  <h2>Training &amp; Metrics</h2>
-                  <div className="grid md:grid-cols-3 gap-4 mt-6">
-                    <Figure src={fig(9)} alt="Learning curves" caption="Fig. 9 — Learning curves with early stopping." />
-                    <Figure src={fig(11)} alt="Calibration" caption="Fig. 11 — Calibration improves top-N hit rate." />
-                    <Figure src={tableFig(3)} alt="Metrics table" caption="Table 3 — Summary metrics by model (r, MAE, P@k)." />
-                  </div>
+                  <h2 className="text-purple-300">Training &amp; Metrics</h2>
+                  <ul className="text-zinc-300">
+                    <li><strong>Loss:</strong> Huber for regression; multi-task for strength and cold/warm ratios.</li>
+                    <li><strong>Validation:</strong> 5-fold CV; early stopping on val MAE.</li>
+                    <li><strong>Reporting:</strong> Pearson/Spearman r, MAE, and precision@k.</li>
+                    <li><strong>Calibration:</strong> isotonic regression for uncertainty-aware top-N picks.</li>
+                  </ul>
                 </section>
 
-                {/* RESULTS */}
                 <section id="results">
-                  <h2>Results</h2>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <Figure src={fig(12)} alt="Parity plot" caption="Fig. 12 — Predicted vs. measured/parity plots." />
-                    <Figure src={fig(13)} alt="Attribution" caption="Fig. 13 — Attribution map highlights −35/−10 and AT-rich UP region." />
-                  </div>
+                  <h2 className="text-purple-300">Results</h2>
+                  <ul className="text-zinc-300">
+                    <li>Ranking was stable across seeds; UB-focused variants dominated the top tranche.</li>
+                    <li>Motif quality and local ΔG windows were the highest-impact features.</li>
+                    <li>Predictions inform selection; magnitudes require confirmation in the <em>PcspA</em> reporter.</li>
+                  </ul>
                 </section>
 
-                {/* ABLATIONS */}
                 <section id="ablations">
-                  <h2>Ablations</h2>
-                  <Figure src={fig(14)} alt="Ablations" caption="Fig. 14 — Effect of removing features/model components." />
+                  <h2 className="text-purple-300">Ablations</h2>
+                  <ul className="text-zinc-300">
+                    <li>Removing motif features reduced correlation and precision@k.</li>
+                    <li>Dropping ΔG windows hurt ranking of UB variants near the RBS.</li>
+                    <li>Simpler linear models underfit with context windows.</li>
+                  </ul>
                 </section>
 
-                {/* TABLES */}
-                <section id="tables">
-                  <h2>Tables</h2>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <Figure src={tableFig(4)} alt="Top ranked variants" caption="Table 4 — Top-ranked UB/DB variants by predicted TIR." />
-                    <Figure src={tableFig(5)} alt="Data splits" caption="Table 5 — Train/val/test split summary." />
-                  </div>
-                </section>
-
-                {/* DESIGNER */}
                 <section id="designer">
-                  <h2>Design Tooling</h2>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <Figure src={fig(15)} alt="Designer UI" caption="Fig. 15 — Motif-aware Designer for targeted objectives." />
-                    <Figure src={fig(16)} alt="Sequence panel" caption="Fig. 16 — Ranked outputs with constraints &amp; scores." />
-                  </div>
+                  <h2 className="text-purple-300">Designer &amp; Selection</h2>
+                  <ul className="text-zinc-300">
+                    <li>Constraint-aware filters gate proposals before ranking.</li>
+                    <li>Export shortlists with model score, Δscore vs. baseline, and uncertainty.</li>
+                    <li>Bundle UB-first picks, then UB+DB combinations.</li>
+                  </ul>
                 </section>
 
-                {/* FUTURE */}
+                <section id="repro">
+                  <h2 className="text-purple-300">Reproducibility</h2>
+                  <ul className="text-zinc-300">
+                    <li>Python 3.11; NumPy/scikit-learn; PyTorch/TF.</li>
+                    <li>Environment YAML, RNG seeds, and split manifests committed.</li>
+                    <li>Dataset/model hashes logged for traceability.</li>
+                  </ul>
+                </section>
+
                 <section id="future">
-                  <h2>Future (Dry Lab)</h2>
+                  <h2 className="text-purple-300">Future</h2>
                   <ul className="text-zinc-300">
                     <li>Retrain with new wet-lab measurements to reduce domain shift.</li>
                     <li>Motif-constrained generative design and grammar-based decoding.</li>

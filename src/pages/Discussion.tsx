@@ -1,10 +1,13 @@
 import React from "react";
 import Layout from "../components/Layout";
+import heroDiscussion from "../assets/banners/hero-discussion.png";
+
+const pngs = import.meta.glob("../assets/figures/*.png", { eager: true, as: "url" });
+const fig = (n: number) => pngs[`../assets/figures/fig-${n}.png`] as string;
 
 type FigureProps = { src: string; alt: string; caption: React.ReactNode };
 const Figure: React.FC<FigureProps> = ({ src, alt, caption }) => (
   <figure className="rounded-2xl border border-zinc-800 overflow-hidden bg-zinc-900">
-    {/* eslint-disable-next-line @next/next/no-img-element */}
     <img src={src} alt={alt} className="w-full h-auto" />
     <figcaption className="p-3 text-sm text-zinc-400 border-t border-zinc-800">{caption}</figcaption>
   </figure>
@@ -21,7 +24,6 @@ const ThinHero: React.FC<{ title: string; image: string; subtitle?: React.ReactN
   <div className="not-prose">
     <div className="mx-auto max-w-6xl">
       <div className="relative overflow-hidden rounded-t-3xl">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={image} alt="" className="h-40 md:h-56 w-full object-cover brightness-90 saturate-90" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/60" aria-hidden />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
@@ -34,16 +36,13 @@ const ThinHero: React.FC<{ title: string; image: string; subtitle?: React.ReactN
   </div>
 );
 
-const fig = (n: number) => `/img/figures/fig-${n}.png`;
-const tableFig = (n: number) => `/img/figures/table-${n}.png`;
-
 export default function Discussion() {
   return (
     <Layout
       hero={
         <ThinHero
           title="Discussion"
-          image="/images/banners/hero-discussion.png"
+          image={heroDiscussion}
           subtitle="Synthesis of wet- and dry-lab findings for cold-inducible expression via the cspA system"
         />
       }
@@ -69,12 +68,9 @@ export default function Discussion() {
               <section className="space-y-12">
                 <section id="summary">
                   <h2 className="text-purple-300">Executive Summary</h2>
-                  <p className="text-zinc-300">
-                    UB variants show larger predicted gains than DB; cloning constraints—not design—were the main blocker.
-                  </p>
+                  <p className="text-zinc-300">UB variants show larger predicted gains than DB; cloning constraints—not design—were the main blocker.</p>
                   <div className="grid md:grid-cols-2 gap-4">
                     <Figure src={fig(2)} alt="UB/DB concept" caption="Fig. 2 — Targeting UB/DB preserves temperature responsiveness." />
-                    <Figure src={fig(3)} alt="Predicted TIR shifts" caption="Fig. 3 — UB drives higher predicted TIR than DB in this context." />
                   </div>
                 </section>
 
@@ -85,18 +81,12 @@ export default function Discussion() {
 
                 <section id="drylab">
                   <h2 className="text-purple-300">Dry Lab</h2>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <Figure src={fig(12)} alt="Parity" caption="Fig. 12 — Ranking quality on hold-out/ proxy labels." />
-                    <Figure src={fig(13)} alt="Attribution" caption="Fig. 13 — Interpretable motifs and UTR nucleotides." />
-                  </div>
+                  <p className="text-zinc-300">Ranking highlighted UB-first designs. Empirical validation is needed in the <em>PcspA</em> context.</p>
                 </section>
 
                 <section id="integration">
                   <h2 className="text-purple-300">Integration</h2>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <Figure src={tableFig(4)} alt="Top picks" caption="Table 4 — Prioritized UB/DB variants for next build." />
-                    <Figure src={fig(10)} alt="Golden Gate plan" caption="Fig. 10 — Spacer → Type IIS swap to enable short promoter insertion." />
-                  </div>
+                  <p className="text-zinc-300">Prioritize top UB picks for the next build; follow with UB+DB combinations via a spacer→Type IIS path.</p>
                 </section>
 
                 <section id="limitations">
@@ -115,7 +105,6 @@ export default function Discussion() {
                     <li>Start with top UB picks; then combine UB+DB.</li>
                     <li>Assay at 15–25&nbsp;°C vs. 37&nbsp;°C; feed results back into the model.</li>
                   </ul>
-                  <Figure src={fig(11)} alt="Assay plan" caption="Fig. 11 — Assay layout for temperature response and kinetics." />
                 </section>
               </section>
             </div>

@@ -1,11 +1,14 @@
 import React from "react";
 import Layout from "../components/Layout";
 import { Link } from "react-router-dom";
+import heroOverview from "../assets/banners/hero-overview.png";
+
+const pngs = import.meta.glob("../assets/figures/*.png", { eager: true, as: "url" });
+const fig = (n: number) => pngs[`../assets/figures/fig-${n}.png`] as string;
 
 type FigureProps = { src: string; alt: string; caption: React.ReactNode };
 const Figure: React.FC<FigureProps> = ({ src, alt, caption }) => (
   <figure className="rounded-2xl border border-zinc-800 overflow-hidden bg-zinc-900">
-    {/* eslint-disable-next-line @next/next/no-img-element */}
     <img src={src} alt={alt} className="w-full h-auto" />
     <figcaption className="p-3 text-sm text-zinc-400 border-t border-zinc-800">{caption}</figcaption>
   </figure>
@@ -22,7 +25,6 @@ const ThinHero: React.FC<{ title: string; image: string; subtitle?: React.ReactN
   <div className="not-prose">
     <div className="mx-auto max-w-6xl">
       <div className="relative overflow-hidden rounded-t-3xl">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={image} alt="" className="h-40 md:h-56 w-full object-cover brightness-90 saturate-90" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/60" aria-hidden />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
@@ -35,16 +37,13 @@ const ThinHero: React.FC<{ title: string; image: string; subtitle?: React.ReactN
   </div>
 );
 
-// helpers to reference exported report assets
-const fig = (n: number) => `/img/figures/fig-${n}.png`;
-
 export default function Overview() {
   return (
     <Layout
       hero={
         <ThinHero
           title="Project Overview"
-          image="/images/banners/hero-overview.png"
+          image={heroOverview}
           subtitle={<span className="text-zinc-300">Evolving the <em>cspA</em> cold-shock element for robust low-temperature expression</span>}
         />
       }
@@ -93,7 +92,7 @@ export default function Overview() {
 
                 <section id="progress" className="scroll-mt-28">
                   <h2 className="text-purple-300">Progress &amp; Challenges</h2>
-                  <Figure src={fig(4)} alt="Assembly diagnostics" caption="Fig. 4 — Assembly diagnostics highlighting short-insert sensitivity." />
+                  <p className="text-zinc-300">Short-insert cloning was the main bottleneck; Type IIS path planned.</p>
                 </section>
 
                 <section id="future" className="scroll-mt-28">

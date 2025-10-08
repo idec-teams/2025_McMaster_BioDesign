@@ -4,12 +4,16 @@ import Layout from "../components/Layout";
 import Hero from "../components/Hero";
 import HexLink from "../components/HexLink";
 
+import hero from "../assets/hero.png";
+import hexDna   from "../assets/hex-dna.svg";
+import hexChart from "../assets/hex-chart.svg";
+import hexChip  from "../assets/hex-chip.svg";
+import hexTeam  from "../assets/hex-team.svg";
+import hexBook  from "../assets/hex-book.svg";
+
 export default function Home() {
-  const hero = (
-    <Hero
-      image="/img/hero.png"
-      objectPosition="center 30%" // raise focal point a bit; adjust or remove if not needed
-    >
+  const heroEl = (
+    <Hero image={hero} objectPosition="center 30%">
       <h1 className="text-[44px] md:text-[64px] font-extrabold leading-tight tracking-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.55)]">
         <span className="block text-white">Colder Cultures,</span>
         <span className="block text-[#2fc7a6]">Stronger Proteins</span>
@@ -44,7 +48,7 @@ export default function Home() {
   );
 
   return (
-    <Layout hero={hero}>
+    <Layout hero={heroEl}>
       {/* Why / What cards */}
       <section className="grid md:grid-cols-2 gap-6">
         <div className="rounded-lg border border-neutral-200/60 bg-white/90 dark:border-neutral-800/80 dark:bg-neutral-900/80 p-6 md:p-7 shadow-[0_1px_2px_rgba(0,0,0,0.04),_0_6px_20px_rgba(0,0,0,0.06)]">
@@ -58,14 +62,12 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="rounded-lg border border-neutral-200/60 bg-white/90 dark:border-neutral-800/80 dark:bg-neutral-900/80 p-6 md:p-7 shadow-[0_1px_2px_rgba(0,0,0,0.04),_0_6px_20px_rgba(0,0,0,0.06)]">
+        <div className="rounded-lg border border-neutral-200/60 bg-white/90 dark:border-neutral-800/80 dark:bg-neutral-900/80 p-6 md:p-7 shadow-[0_1px_2px_rgba(0,0,0,0.06)]">
           <h2 className="text-[20px] md:text-[22px] font-semibold tracking-[-0.01em]">
             What we’re building
           </h2>
           <ul className="mt-2 space-y-1.5 list-disc list-inside text-zinc-700 dark:text-zinc-300 text-[14.5px]">
-            <li>
-              Promoter swaps against <em>PcspA</em> (Anderson set)
-            </li>
+            <li>Promoter swaps against <em>PcspA</em> (Anderson set)</li>
             <li>Upstream & downstream box mutagenesis</li>
             <li>Model-guided design with GFP readout</li>
           </ul>
@@ -104,11 +106,11 @@ export default function Home() {
           Click to read more
         </h3>
         <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5 place-items-center">
-          <HexLink to="/overview" icon="/img/hex-dna.svg" label="Overview" />
-          <HexLink to="/wetlab" icon="/img/hex-chart.svg" label="Wetlab" />
-          <HexLink to="/drylab" icon="/img/hex-chip.svg" label="Drylab" />
-          <HexLink to="/team" icon="/img/hex-team.svg" label="Team" />
-          <HexLink to="/references" icon="/img/hex-book.svg" label="References" />
+          <HexLink to="/overview"   icon={hexDna}   label="Overview" />
+          <HexLink to="/wetlab"     icon={hexChart} label="Wetlab" />
+          <HexLink to="/drylab"     icon={hexChip}  label="Drylab" />
+          <HexLink to="/team"       icon={hexTeam}  label="Team" />
+          <HexLink to="/references" icon={hexBook}  label="References" />
         </div>
       </section>
     </Layout>
