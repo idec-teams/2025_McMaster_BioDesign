@@ -85,7 +85,7 @@ export default function Team() {
         { name: "Mischa Esmail", img: "mischa-esmail.jpg", email: "esmailm@mcmaster.ca", link: "https://www.linkedin.com/in/mischa-esmail-a4a281242/" },
         { name: "Andrew Lian", img: "andrew-lian.jpg", email: "liana2@mcmaster.ca", link: "https://www.linkedin.com/in/andrew-lian/" },
         { name: "Sarah Moran", img: "sarah-moran.jpg", email: "morans6@mcmaster.ca", link: "https://www.linkedin.com/in/sarahmoran36/" },
-        { name: "Tvara Parikh", img: "tvara-parikh.jpg", email: "parikt5@mcmaster.ca", link: "www.linkedin.com/in/tvara-parikh-b76290275" },
+        { name: "Tvara Parikh", img: "tvara-parikh.jpg", email: "parikt5@mcmaster.ca", link: "https://www.linkedin.com/in/tvara-parikh-b76290275/" },
         { name: "Brandon Yoo", img: "brandon-yoo.jpg", email: "yoob2@mcmaster.ca", link: "https://www.linkedin.com/in/brandonwsyoo/" },
       ],
     },
