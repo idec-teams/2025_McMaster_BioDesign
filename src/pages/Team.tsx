@@ -38,6 +38,7 @@ export default function Team() {
       people: [
         { name: "Jiayi (Christina) Zheng", img: "jiayi-zheng.jpg", email: "zhengj83@mcmaster.ca", link: "https://www.linkedin.com/in/christina-jiayi-zheng/" },
         { name: "Suky Zheng", img: "suky-zheng.jpg", email: "zhengs66@mcmaster.ca", link: "https://www.linkedin.com/in/suky-zheng/" },
+        { name: "Jordan Classen", img: "jordan-classen.jpg", email: "classenj@mcmaster.ca", link: "https://www.linkedin.com/in/jclassen/" },
       ],
     },
     {
@@ -45,7 +46,7 @@ export default function Team() {
       title: "Mentors",
       people: [
         { name: "William Pihlainen-Bleecker", img: "william-pihlainen-bleecker.jpg", email: "bleeckew@mcmaster.ca", link: "https://www.linkedin.com/in/will-pb/" },
-        { name: "Jordan Classen", img: "jordan-classen.jpg", email: "classenj@mcmaster.ca", link: "https://www.linkedin.com/in/jclassen/" },
+        
       ],
     },
     {
